@@ -7,33 +7,27 @@ import Image from 'next/image'
 const categories = [
   {
     title: 'Marketing',
-    subtitle: 'Campaigns & SEO',
+    subtitle: 'SEO, Ads & Brand Promotion',
     type: 'video',
     media: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-connection-background-loop-32609-large.mp4',
   },
   {
-    title: 'Creation',
-    subtitle: 'Visuals & Copy',
+    title: 'Content',
+    subtitle: 'Brand Design & Visuals',
     type: 'image',
     media: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop',
   },
   {
-    title: 'Engineering',
-    subtitle: 'Web Platforms',
+    title: 'Software',
+    subtitle: 'E-commerce & Web Platforms',
     type: 'video',
     media: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-blue-and-purple-gradient-background-41617-large.mp4',
   },
   {
     title: 'Automation',
-    subtitle: 'AI & Chatbots',
+    subtitle: 'Personal Agents & RAG Chatbots',
     type: 'image',
     media: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop',
-  },
-  {
-    title: 'Identity',
-    subtitle: 'Brand Positioning',
-    type: 'video',
-    media: 'https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-the-water-123-large.mp4',
   }
 ]
 

@@ -7,21 +7,21 @@ import { staggerContainer, staggerItem } from '@/lib/animation-variants'
 import { Zap, Users, Award, CalendarCheck } from 'lucide-react'
 
 const stats = [
-  { value: 4, suffix: '', label: 'Core Service Areas', icon: Zap },
-  { value: 3, suffix: '', label: 'Guiding Values', icon: Users },
-  { value: 1, suffix: '', label: 'Growth Partner Mindset', icon: Award },
-  { value: 24, suffix: '/7', label: 'Digital-First Thinking', icon: CalendarCheck },
+  { value: 100, suffix: '%', label: 'Data-Driven Strategies', icon: Zap },
+  { value: 24, suffix: '/7', label: 'Creative Innovation', icon: Users },
+  { value: 10, suffix: 'X', label: 'Proven Growth Results', icon: Award },
+  { value: 360, suffix: '°', label: 'Strategic Partnership', icon: CalendarCheck },
 ]
 
 const partners = [
-  'Chileghuri', 'Organic', 'eSolution', 'RevEnComm',
-  'Digital Marketing', 'Website Solution', 'Content Strategy', 'AI & Automation',
+  'E-Commerce Brands', 'SaaS Platforms', 'Real Estate Agencies', 'Tech Startups',
+  'Healthcare Clinics', 'Retail Businesses', 'B2B Services', 'Education Tech'
 ]
 
 const pillRows = [
-  ['Brand Promotion', 'Social Media Marketing', 'Data-Driven Digital Marketing', 'Email Marketing'],
-  ['E-Commerce Website Development', 'Landing Page Design', 'Creative Innovation', 'Performance Tracking'],
-  ['Collaboration', 'Innovation', 'Integrity', 'Business Growth', 'Tailored Strategy', 'Measurable Results'],
+  ['Data Analytics', 'SEO Optimization', 'Meta Ads', 'TikTok Campaigns'],
+  ['Brand Positioning', 'Creative Copywriting', 'Web Infrastructure', 'Chatbot Implementation'],
+  ['Transparency', 'A/B Testing', 'Long-term Goals', 'Agile Workflows', 'Performance First'],
 ]
 
 function StatCard({ value, suffix, label, icon: Icon }: (typeof stats)[0]) {
@@ -38,11 +38,11 @@ function StatCard({ value, suffix, label, icon: Icon }: (typeof stats)[0]) {
         </div>
       </div>
       <div>
-        <div className="text-[clamp(2rem,4vw,3.5rem)] font-extrabold text-white tabular-nums leading-none">
+        <div className="text-[clamp(1.8rem,3.5vw,3rem)] font-extrabold text-white tabular-nums leading-[1] mb-1">
           <span ref={ref}>0</span>
-          <span>{suffix}</span>
+          <span className="text-[#673DE6]">{suffix}</span>
         </div>
-        <p className="text-white/45 text-sm mt-2 font-medium">{label}</p>
+        <p className="text-white/60 text-sm mt-3 font-semibold leading-tight">{label}</p>
       </div>
     </div>
   )
@@ -61,8 +61,8 @@ function PillRow({ pills, reverse = false }: { pills: string[]; reverse?: boolea
         {[...pills, ...pills].map((pill, i) => (
           <span
             key={i}
-            className="shrink-0 px-4 py-1.5 rounded-full border border-white/[0.08] text-white/35
-                       text-xs font-medium tracking-wide whitespace-nowrap bg-glass"
+            className="shrink-0 px-4 py-1.5 rounded-full border border-white/[0.08] text-white/40
+                       text-xs font-semibold tracking-wide whitespace-nowrap bg-glass"
           >
             {pill}
           </span>
@@ -85,19 +85,32 @@ export default function AboutSection() {
 
         {/* Section label */}
         <m.div variants={staggerContainer} initial="hidden" whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }} className="mb-16">
-          <m.div variants={staggerItem}
-            className="flex items-center gap-4 mb-6">
-            <span className="text-white/40 text-sm font-semibold tracking-widest uppercase">01</span>
-            <div className="h-px w-12 bg-white/20" />
-            <span className="text-white/40 text-sm font-semibold uppercase tracking-widest">About</span>
+          viewport={{ once: true, amount: 0.15 }} className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
+          
+          <div>
+            <m.div variants={staggerItem}
+              className="flex items-center gap-4 mb-6">
+              <span className="text-white/40 text-sm font-semibold tracking-widest uppercase">01</span>
+              <div className="h-px w-12 bg-white/20" />
+              <span className="text-white/40 text-sm font-semibold uppercase tracking-widest">About Us</span>
+            </m.div>
+
+            <m.h2 variants={staggerItem} id="about-heading"
+              className="text-[clamp(1.8rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.1] max-w-3xl">
+              Transforming Businesses Through{' '}
+              <span className="text-gradient">Digital Excellence</span>
+            </m.h2>
+          </div>
+
+          <m.div variants={staggerItem} className="flex flex-col gap-5 border-l border-white/[0.08] pl-6 md:pl-10 py-2">
+            <p className="text-white/60 leading-relaxed font-medium">
+              At Revencomm, we&apos;re not just another digital marketing agency. We&apos;re your strategic partner in growth, combining cutting-edge technology with creative innovation to deliver measurable results that matter.
+            </p>
+            <p className="text-white/40 text-sm">
+              Every decision we make is backed by insights and analytics, ensuring fresh ideas generate trackable, sustainable traction. 
+            </p>
           </m.div>
 
-          <m.h2 variants={staggerItem} id="about-heading"
-            className="text-[clamp(1.8rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.1] max-w-3xl">
-            Transforming Businesses Through{' '}
-            <span className="text-gradient">Digital Excellence</span>
-          </m.h2>
         </m.div>
 
         {/* Stats grid */}
