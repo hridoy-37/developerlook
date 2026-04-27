@@ -124,7 +124,6 @@ export default function CategoriesSection() {
         
         {/* Header */}
         <div className="flex items-center gap-6 mb-12 md:mb-20">
-          <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">04</span>
           <div className="h-px w-16 bg-white/10" />
           <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">Core Disciplines</span>
         </div>

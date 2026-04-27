@@ -40,8 +40,9 @@ export default function FaqSection() {
     <section id="faq" className="relative py-[clamp(70px,8.6vw,150px)] px-5 md:px-[25px] bg-[#0c0c12] overflow-hidden"
       aria-labelledby="faq-heading">
 
-      {/* Decorative background element */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#673DE6]/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* Section number watermark */}
+      <span className="absolute right-6 top-6 font-extrabold text-white/[0.025] select-none pointer-events-none leading-none
+                       text-[clamp(80px,12vw,160px)]" aria-hidden="true">05</span>
 
       <div className="max-w-[1000px] mx-auto relative z-10">
         <m.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-14 text-center">
@@ -51,13 +52,13 @@ export default function FaqSection() {
             </div>
             <div className="flex items-center justify-center gap-4">
               <div className="h-px w-8 bg-gradient-to-r from-transparent to-white/20" />
-              <span className="text-white/40 text-sm font-semibold tracking-widest uppercase">FAQ</span>
+              <span className="text-white/40 text-sm font-semibold tracking-widest uppercase">05 FAQ</span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-white/20" />
             </div>
           </m.div>
 
           <m.h2 variants={staggerItem} id="faq-heading"
-            className="text-[clamp(1.8rem,4vw,3.2rem)] font-extrabold tracking-tight leading-[1.1] mb-6">
+            className="text-[clamp(2rem,6vw,4.5rem)] font-extrabold tracking-tight leading-[1] mb-6">
             Frequently Asked Questions
           </m.h2>
           

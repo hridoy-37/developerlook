@@ -1,11 +1,6 @@
-// RSC — static. No 'use client' needed.
-// Social brand icons (Facebook, Instagram, etc.) are all deprecated in lucide-react v0.577.
-// Using inline SVG paths for RevEnComm's actual socials instead.
-
 import Link from 'next/link'
-import { BarChart2, Mail, Phone, MapPin } from 'lucide-react'
+import { MapPin, Phone, Mail } from 'lucide-react'
 
-// Inline SVG social icons — avoids deprecated lucide-react brand icons entirely
 function IconFacebook() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -40,135 +35,103 @@ function IconTiktok() {
 }
 
 const socials = [
-  { label: 'Facebook', Icon: IconFacebook, href: 'https://www.facebook.com/' },
-  { label: 'Instagram', Icon: IconInstagram, href: 'https://www.instagram.com/' },
-  { label: 'LinkedIn', Icon: IconLinkedin, href: 'https://www.linkedin.com/' },
-  { label: 'TikTok', Icon: IconTiktok, href: 'https://www.tiktok.com/' },
+  { label: 'Facebook',  Icon: IconFacebook,  href: 'https://www.facebook.com/revencomm' },
+  { label: 'Instagram', Icon: IconInstagram, href: 'https://www.instagram.com/revencomm' },
+  { label: 'LinkedIn',  Icon: IconLinkedin,  href: 'https://www.linkedin.com/company/revencomm' },
+  { label: 'TikTok',   Icon: IconTiktok,    href: 'https://www.tiktok.com/@revencomm' },
 ]
 
-const links = {
-  Services: [
-    { label: 'Digital Marketing', href: '/services' },
-    { label: 'Content Solution', href: '/services' },
-    { label: 'Website Solution', href: '/services' },
-    { label: 'AI & Automation', href: '/services' },
-  ],
-  Company: [
-    { label: 'About', href: '/about' },
-    { label: 'Case Studies', href: '/case-studies' },
-    { label: 'Blog', href: '/blogs' },
-    { label: 'Contact', href: '#contact' },
-  ],
-  Resources: [
-    { label: 'Website Solution', href: '/services' },
-    { label: 'Free Consultation', href: '#contact' },
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-  ],
-}
+const legalLinks = [
+  { label: 'Terms & Conditions', href: '#' },
+  { label: 'Privacy Policy',     href: '#' },
+  { label: 'Contact Us',         href: '/contact' },
+]
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/6 pt-16 pb-8 px-5 md:px-6.25" role="contentinfo">
-      <div className="max-w-350 mx-auto">
+    <footer
+      className="border-t border-white/10 bg-[#0A0A0F] px-5 md:px-[25px] pt-10 pb-8 font-sans"
+      role="contentinfo"
+    >
+      <div className="max-w-[1400px] mx-auto">
+        {/* Main row */}
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
 
-        {/* Newsletter bar */}
-        <div className="bg-glass border border-white/8 rounded-[20px] px-8 py-6 flex flex-col md:flex-row
-                        items-center justify-between gap-6 mb-16">
-          <div>
-            <h3 className="text-white font-bold text-lg mb-1">Let&apos;s talk about your next growth move</h3>
-            <p className="text-white/45 text-sm">Share your email and we&apos;ll follow up with a consultation.</p>
-          </div>
-          <form className="flex gap-3 w-full md:w-auto" aria-label="Newsletter signup">
-            <input type="email" placeholder="your@email.com" aria-label="Email address"
-              className="flex-1 md:w-64 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5
-                         text-white text-sm placeholder:text-white/30 outline-none
-                         focus:border-primary/50 transition-colors min-h-11" />
-            <button type="submit"
-              className="bg-primary text-white font-semibold px-5 py-2.5 rounded-xl text-sm
-                         hover:bg-primary-dark transition-colors min-h-11 whitespace-nowrap
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-              Subscribe
-            </button>
-          </form>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-16">
-          {/* Brand col */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-2">
-            <Link href="/"
-              className="flex items-center gap-2.5 mb-5 w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <BarChart2 size={16} className="text-white" />
-              </div>
-              <span className="font-bold text-base">RevEn<span className="text-primary">Comm</span></span>
-            </Link>
-
-            <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-6">
-              Transforming businesses through digital marketing, website solutions, creative strategy,
-              and practical automation.
+          {/* Left — Office info */}
+          <div className="flex flex-col gap-3">
+            <p className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase mb-1">
+              Bangladesh Office
             </p>
+            <a
+              href="https://maps.google.com/?q=Square+Road,+GP+Ja,+Mohakhali,+Dhaka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2 text-white/50 hover:text-white text-sm transition-colors"
+            >
+              <MapPin size={13} className="text-[#673DE6] shrink-0 mt-0.5" />
+              Square Road, GP Ja, Mohakhali, Dhaka
+            </a>
+            <a
+              href="tel:+8801806673304"
+              className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+            >
+              <Phone size={13} className="text-[#673DE6] shrink-0" />
+              01806673304
+            </a>
+            <a
+              href="mailto:info@revencomm.com"
+              className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+            >
+              <Mail size={13} className="text-[#673DE6] shrink-0" />
+              info@revencomm.com
+            </a>
+          </div>
 
-            {/* Contact info */}
-            <div className="flex flex-col gap-2.5 mb-6">
-              <a href="mailto:info@revencomm.com"
-                className="flex items-center gap-2 text-white/40 hover:text-white text-sm transition-colors">
-                <Mail size={13} className="text-primary shrink-0" />
-                info@revencomm.com
-              </a>
-              <a href="tel:+8801806673304"
-                className="flex items-center gap-2 text-white/40 hover:text-white text-sm transition-colors">
-                <Phone size={13} className="text-primary shrink-0" />
-                +880 01806673304
-              </a>
-              <div className="flex items-start gap-2 text-white/40 text-sm">
-                <MapPin size={13} className="text-primary shrink-0 mt-0.5" />
-                Square Road, GP Ja, Mohakhali, Dhaka
-              </div>
-            </div>
+          {/* Center — Legal / nav links */}
+          <nav aria-label="Footer navigation">
+            <p className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+              Legal
+            </p>
+            <ul className="flex flex-col gap-3">
+              {legalLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link
+                    href={href}
+                    className="text-white/50 hover:text-white text-sm transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-            {/* Socials */}
+          {/* Right — Socials + copyright */}
+          <div className="flex flex-col gap-4">
+            <p className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">
+              Follow Us
+            </p>
             <div className="flex gap-2.5" role="list" aria-label="Social media links">
               {socials.map(({ label, Icon, href }) => (
-                <a key={label} href={href} role="listitem" aria-label={label}
-                  className="w-9 h-9 rounded-xl border border-white/10 bg-glass flex items-center justify-center
-                             text-white/40 hover:text-white hover:border-primary/40 transition-colors duration-200
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                <a
+                  key={label}
+                  href={href}
+                  role="listitem"
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 border border-white/10 bg-white/5 flex items-center justify-center
+                             text-white/40 hover:text-white hover:border-[#673DE6]/50 transition-colors duration-200"
+                >
                   <Icon />
                 </a>
               ))}
             </div>
+            <p className="text-white/25 text-xs mt-auto">
+              © {new Date().getFullYear()} RevEnComm Media & Tech.<br className="hidden md:block" /> All rights reserved.
+            </p>
           </div>
 
-          {/* Link cols */}
-          {Object.entries(links).map(([category, items]) => (
-            <div key={category}>
-              <h3 className="text-white/60 text-xs font-bold uppercase tracking-widest mb-5">{category}</h3>
-              <ul className="flex flex-col gap-3" role="list">
-                {items.map((item) => (
-                  <li key={item.label}>
-                    <Link href={item.href}
-                      className="text-white/40 text-sm hover:text-white transition-colors duration-200
-                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/6">
-          <p className="text-white/25 text-xs">
-            © {new Date().getFullYear()} RevEnComm Media & Tech. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            {['Terms & Conditions', 'Privacy Policy', 'Manage Cookies'].map((l) => (
-              <a key={l} href="#" className="text-white/25 text-xs hover:text-white/50 transition-colors">{l}</a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

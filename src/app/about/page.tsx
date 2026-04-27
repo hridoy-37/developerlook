@@ -1,15 +1,20 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import AboutHero from './AboutHero'
+import OurTeam from './OurTeam'
+
+export const metadata = {
+  title: 'About Us | RevEnComm',
+  description: 'Learn more about our mission, vision, and the team driving digital excellence.',
+}
 
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-[80vh] flex items-center justify-center pt-32 pb-16 px-5 md:px-[25px]">
-        <div className="max-w-[800px] mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">About RevEnComm</h1>
-          <p className="text-white/50 text-lg">More information about our mission and team coming soon.</p>
-        </div>
+      <main id="main-content" className="pt-24 pb-0 bg-[#0A0A0F]">
+        <AboutHero />
+        <OurTeam />
       </main>
       <Footer />
     </>
