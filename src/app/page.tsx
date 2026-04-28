@@ -42,7 +42,7 @@ export default function HomePage() {
         <FaqSection />
         <BlogSection />
         <CtaBanner />
-        <NewsletterSection />
+        {/* <NewsletterSection /> */}
       </main>
 
       <Footer />
