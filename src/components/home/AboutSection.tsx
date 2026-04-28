@@ -74,85 +74,85 @@ function PillRow({ pills, reverse = false }: { pills: string[]; reverse?: boolea
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-[clamp(70px,8.6vw,150px)] px-5 md:px-[25px] overflow-hidden"
+    <section id="about" className="relative py-[clamp(80px,10vw,180px)] px-5 md:px-10 overflow-hidden"
       aria-labelledby="about-heading">
 
       {/* Section number watermark */}
-      <span className="absolute right-6 top-6 font-extrabold text-white/[0.025] select-none pointer-events-none leading-none
-                       text-[clamp(80px,12vw,160px)]" aria-hidden="true">01</span>
+      <span className="absolute right-10 top-10 font-black text-white/[0.015] select-none pointer-events-none leading-none
+                       text-[clamp(100px,15vw,250px)]" aria-hidden="true">01</span>
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] mx-auto relative z-10">
 
-        {/* Section label */}
-        <m.div variants={staggerContainer} initial="hidden" whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }} className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
-          
-          <div>
-            <m.div variants={staggerItem}
-              className="flex items-center gap-4 mb-6">
-              <span className="text-white/40 text-sm font-semibold tracking-widest uppercase">01</span>
-              <div className="h-px w-12 bg-white/20" />
-              <span className="text-white/40 text-sm font-semibold uppercase tracking-widest">About Us</span>
-            </m.div>
+        {/* Section label & Header */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start mb-24">
+          <m.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex items-center gap-4 mb-8">
+              <span className="text-[#FF8A00] text-xs font-bold tracking-[0.3em] uppercase">About RevEnComm</span>
+              <div className="h-px w-12 bg-white/10" />
+            </div>
 
-            <m.h2 variants={staggerItem} id="about-heading"
-              className="text-[clamp(1.8rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.1] max-w-3xl">
-              Transforming Businesses Through{' '}
+            <h2 id="about-heading"
+              className="text-[clamp(2rem,5vw,4.5rem)] font-black tracking-tight leading-[0.95] text-white">
+              Transforming Businesses Through <br/>
               <span className="text-gradient">Digital Excellence</span>
-            </m.h2>
-          </div>
-
-          <m.div variants={staggerItem} className="flex flex-col gap-5 border-l border-white/[0.08] pl-6 md:pl-10 py-2">
-            <p className="text-white/60 leading-relaxed font-medium">
-              At Revencomm, we&apos;re not just another digital marketing agency. We&apos;re your strategic partner in growth, combining cutting-edge technology with creative innovation to deliver measurable results that matter.
-            </p>
-            <p className="text-white/40 text-sm">
-              Every decision we make is backed by insights and analytics, ensuring fresh ideas generate trackable, sustainable traction. 
-            </p>
+            </h2>
           </m.div>
 
-        </m.div>
+          <m.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-8 lg:pt-16"
+          >
+            <p className="text-[clamp(1.1rem,1.5vw,1.4rem)] text-white/60 leading-relaxed font-medium border-l-2 border-[#FF8A00] pl-8">
+              At RevEnComm, we&apos;re not just another digital marketing agency. We&apos;re your strategic partner in growth, combining cutting-edge technology with creative innovation to deliver measurable results that matter.
+            </p>
+            <div className="flex flex-wrap gap-4 pl-8">
+              {['Strategy', 'Creative', 'Execution', 'Automation'].map((tag) => (
+                <span key={tag} className="text-[10px] font-bold uppercase tracking-widest text-white/30 border border-white/10 px-3 py-1 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </m.div>
+        </div>
 
         {/* Stats grid */}
-        <m.div variants={staggerContainer} initial="hidden" whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {stats.map((stat) => (
-            <m.div key={stat.label} variants={staggerItem}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-24">
+          {stats.map((stat, i) => (
+            <m.div 
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
               <StatCard {...stat} />
             </m.div>
           ))}
-        </m.div>
+        </div>
 
-        {/* Partners strip */}
-        <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16">
-          <p className="text-white/30 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
-            Focused On Growth, Clarity, And Long-Term Relationships
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {partners.map((p) => (
-              <span key={p}
-                className="px-4 py-2 rounded-xl border border-white/[0.08] bg-glass text-white/40 text-sm font-medium
-                           hover:border-[#673DE6]/30 hover:text-white/60 transition-colors duration-200">
-                {p}
-              </span>
+        {/* Partners strip & Pill rows */}
+        <div className="space-y-12">
+          <m.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="flex flex-col gap-4"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 mb-4">Focused On Growth, Clarity, And Partnerships</p>
+            {pillRows.map((pills, i) => (
+              <PillRow key={i} pills={pills} reverse={i % 2 !== 0} />
             ))}
-          </div>
-        </m.div>
-
-        {/* Skill pill rows */}
-        <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col gap-3">
-          <p className="text-white/25 text-xs tracking-[0.25em] uppercase mb-2">What RevEnComm stands for</p>
-          {pillRows.map((pills, i) => (
-            <PillRow key={i} pills={pills} reverse={i % 2 !== 0} />
-          ))}
-        </m.div>
+          </m.div>
+        </div>
       </div>
     </section>
   )

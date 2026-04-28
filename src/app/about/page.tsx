@@ -1,12 +1,13 @@
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import AboutHero from './AboutHero'
-import OurTeam from './OurTeam'
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import AboutHero from "./AboutHero";
+import OurTeam from "./OurTeam";
 
 export const metadata = {
-  title: 'About Us | RevEnComm',
-  description: 'Learn more about our mission, vision, and the team driving digital excellence.',
-}
+  title: "About Us | RevEnComm",
+  description:
+    "Learn more about our mission, vision, and the team driving digital excellence.",
+};
 
 export default function AboutPage() {
   return (
@@ -18,5 +19,5 @@ export default function AboutPage() {
       </main>
       <Footer />
     </>
-  )
+  );
 }

@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer'
 import { getContentBySlug, CaseStudy } from '@/lib/content'
 
@@ -25,7 +23,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <>
-      <Navbar />
       <main id="main-content" className="pt-32 pb-24 bg-[#0A0A0F] min-h-screen">
         <article className="max-w-[1000px] mx-auto px-5 md:px-[25px]">
           
@@ -72,7 +69,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           
         </article>
       </main>
-      <Footer />
     </>
   )
 }

@@ -24,20 +24,20 @@ export default function ContactForm() {
       <m.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-[#11111A] border border-white/[0.08] rounded-[32px] p-10 flex flex-col items-center justify-center text-center min-h-[500px]"
+        className="bg-white/[0.02] backdrop-blur-3xl border border-[#FF8A00]/20 rounded-[48px] p-10 flex flex-col items-center justify-center text-center min-h-[600px] shadow-2xl shadow-[#FF8A00]/5"
       >
-        <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
-          <CheckCircle2 size={40} className="text-green-500" />
+        <div className="w-24 h-24 bg-[#FF8A00]/10 border border-[#FF8A00]/20 rounded-full flex items-center justify-center mb-8">
+          <CheckCircle2 size={40} className="text-[#FF8A00]" />
         </div>
-        <h3 className="text-3xl font-extrabold text-white mb-4">Message Sent!</h3>
-        <p className="text-white/60 mb-8 max-w-sm">
-          Thank you for reaching out. Our team will review your project and get back to you within 24 hours.
+        <h3 className="text-4xl font-black text-white mb-6 uppercase tracking-tight">Relay Received</h3>
+        <p className="text-white/40 mb-12 max-w-sm font-medium leading-relaxed">
+          Strategic intelligence has been transmitted. Our growth consultants will contact you within one business cycle.
         </p>
         <button 
           onClick={() => setIsSubmitted(false)}
-          className="text-white/40 hover:text-white transition-colors text-sm font-semibold tracking-wider uppercase"
+          className="text-[#FF8A00] hover:text-white transition-colors text-[10px] font-black tracking-[0.4em] uppercase border-b border-[#FF8A00]/30 pb-1"
         >
-          Send another message
+          New Transmission
         </button>
       </m.div>
     )
@@ -48,65 +48,70 @@ export default function ContactForm() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.2, duration: 0.6 }}
-      className="bg-[#11111A] border border-white/[0.08] rounded-[32px] p-6 sm:p-10"
+      className="bg-white/[0.02] backdrop-blur-3xl border border-white/5 rounded-[48px] p-8 sm:p-12 shadow-2xl"
     >
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="firstName" className="text-white/60 text-xs font-semibold tracking-wider uppercase pl-1">First Name</label>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-3">
+            <label htmlFor="firstName" className="text-white/20 text-[10px] font-black tracking-[0.3em] uppercase pl-1">First Identity</label>
             <input 
               required
               type="text" 
               id="firstName" 
-              className="bg-[#0A0A0F] border border-white/[0.06] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#673DE6]/50 transition-colors"
-              placeholder="John"
+              className="bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-[#FF8A00]/40 focus:bg-white/[0.08] transition-all font-medium placeholder:text-white/10"
+              placeholder="E.g. John"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="lastName" className="text-white/60 text-xs font-semibold tracking-wider uppercase pl-1">Last Name</label>
+          <div className="flex flex-col gap-3">
+            <label htmlFor="lastName" className="text-white/20 text-[10px] font-black tracking-[0.3em] uppercase pl-1">Last Identity</label>
             <input 
               required
               type="text" 
               id="lastName" 
-              className="bg-[#0A0A0F] border border-white/[0.06] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#673DE6]/50 transition-colors"
-              placeholder="Doe"
+              className="bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-[#FF8A00]/40 focus:bg-white/[0.08] transition-all font-medium placeholder:text-white/10"
+              placeholder="E.g. Doe"
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-white/60 text-xs font-semibold tracking-wider uppercase pl-1">Email Address</label>
+        <div className="flex flex-col gap-3">
+          <label htmlFor="email" className="text-white/20 text-[10px] font-black tracking-[0.3em] uppercase pl-1">Relay Channel</label>
           <input 
             required
             type="email" 
             id="email" 
-            className="bg-[#0A0A0F] border border-white/[0.06] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#673DE6]/50 transition-colors"
-            placeholder="john@example.com"
+            className="bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-[#FF8A00]/40 focus:bg-white/[0.08] transition-all font-medium placeholder:text-white/10"
+            placeholder="E.g. connect@brand.com"
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="service" className="text-white/60 text-xs font-semibold tracking-wider uppercase pl-1">Service Needed</label>
-          <select 
-            id="service" 
-            className="bg-[#0A0A0F] border border-white/[0.06] rounded-xl px-5 py-4 text-white/80 focus:outline-none focus:border-[#673DE6]/50 transition-colors appearance-none"
-          >
-            <option value="web-development">Web Development</option>
-            <option value="ui-ux-design">UI/UX Design</option>
-            <option value="digital-marketing">Digital Marketing</option>
-            <option value="ai-automation">AI & Automation</option>
-            <option value="other">Other</option>
-          </select>
+        <div className="flex flex-col gap-3">
+          <label htmlFor="service" className="text-white/20 text-[10px] font-black tracking-[0.3em] uppercase pl-1">Strategic Objective</label>
+          <div className="relative group">
+            <select 
+              id="service" 
+              className="w-full bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white/80 focus:outline-none focus:border-[#FF8A00]/40 focus:bg-white/[0.08] transition-all font-medium appearance-none cursor-pointer"
+            >
+              <option value="web-development">Web & Software Ecosystems</option>
+              <option value="ui-ux-design">Visual Identity & UX</option>
+              <option value="digital-marketing">Market Dominance</option>
+              <option value="ai-automation">AI & Workflow Automation</option>
+              <option value="other">Bespoke Intelligence</option>
+            </select>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-white/20 group-hover:text-[#FF8A00] transition-colors">
+              <ArrowUpRight size={16} className="rotate-45" />
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="text-white/60 text-xs font-semibold tracking-wider uppercase pl-1">Project Details</label>
+        <div className="flex flex-col gap-3">
+          <label htmlFor="message" className="text-white/20 text-[10px] font-black tracking-[0.3em] uppercase pl-1">Mission Brief</label>
           <textarea 
             required
             id="message" 
-            rows={4}
-            className="bg-[#0A0A0F] border border-white/[0.06] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#673DE6]/50 transition-colors resize-none"
-            placeholder="Tell us about your goals..."
+            rows={5}
+            className="bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-[#FF8A00]/40 focus:bg-white/[0.08] transition-all font-medium resize-none placeholder:text-white/10"
+            placeholder="Define your vision..."
           />
         </div>
 
@@ -115,21 +120,21 @@ export default function ContactForm() {
           disabled={isSubmitting}
           onMouseEnter={() => setBtnHovered(true)}
           onMouseLeave={() => setBtnHovered(false)}
-          className="mt-4 group relative flex items-center justify-between bg-white text-black font-bold pl-8 pr-2 py-2 rounded-full min-h-[60px] cursor-pointer w-full disabled:opacity-70 disabled:cursor-not-allowed"
+          className="mt-4 group relative flex items-center justify-between bg-white text-black font-black pl-10 pr-2 py-2 rounded-full min-h-[70px] cursor-pointer w-full disabled:opacity-70 disabled:cursor-not-allowed transition-all hover:bg-[#FF8A00] hover:text-white"
         >
-          <span className="text-[14px] uppercase tracking-widest overflow-hidden h-5 relative block w-32 shrink-0">
+          <span className="text-[12px] uppercase tracking-[0.3em] overflow-hidden h-5 relative block w-40 shrink-0">
             <span className={`block transition-transform duration-500 ease-[0.16,1,0.3,1] ${btnHovered && !isSubmitting ? '-translate-y-full' : 'translate-y-0'}`}>
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? 'Transmitting...' : 'Initiate Relay'}
             </span>
             <span
               className="absolute top-full left-0 block transition-transform duration-500 ease-[0.16,1,0.3,1]"
               style={{ transform: btnHovered && !isSubmitting ? 'translateY(-100%)' : 'translateY(0)' }}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? 'Transmitting...' : 'Initiate Relay'}
             </span>
           </span>
-          <span className="w-11 h-11 bg-black rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:rotate-45">
-            <ArrowUpRight size={18} className="text-white" />
+          <span className="w-14 h-14 bg-black rounded-full flex items-center justify-center shrink-0 transition-all duration-500 group-hover:rotate-45 group-hover:bg-white">
+            <ArrowUpRight size={22} className="text-white group-hover:text-black" />
           </span>
         </button>
       </form>

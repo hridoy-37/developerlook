@@ -43,127 +43,138 @@ const services = [
 export default function ServicesSection() {
   const containerRef = useRef<HTMLElement>(null)
   
-  // Track the scroll of the entire section to drive the cards' animation
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end']
   })
 
   return (
-    <section ref={containerRef} id="services" className="relative py-[clamp(70px,8.6vw,150px)] px-5 md:px-[25px] bg-[#0c0c12]"
+    <section ref={containerRef} id="services" className="relative py-[clamp(80px,10vw,180px)] px-5 md:px-10"
       aria-labelledby="services-heading">
 
-      <span className="absolute right-6 top-6 font-extrabold text-white/[0.025] select-none pointer-events-none leading-none
-                       text-[clamp(80px,12vw,160px)]" aria-hidden="true">03</span>
+      {/* Section number watermark */}
+      <span className="absolute right-10 top-10 font-black text-white/[0.015] select-none pointer-events-none leading-none
+                       text-[clamp(100px,15vw,250px)]" aria-hidden="true">03</span>
 
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 items-start">
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24 items-start">
 
           {/* Left — sticky heading */}
-          <m.div variants={staggerContainer} initial="hidden" whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }} className="lg:sticky lg:top-24 self-start">
+          <div className="lg:sticky lg:top-24 self-start">
+            <m.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <span className="text-[#FF8A00] text-xs font-bold tracking-[0.3em] uppercase">What we do</span>
+                <div className="h-px w-12 bg-white/10" />
+              </div>
 
-            <m.div variants={staggerItem} className="flex items-center gap-4 mb-6">
-              <span className="text-white/40 text-sm font-semibold tracking-widest uppercase">03</span>
-              <div className="h-px w-12 bg-white/20" />
-              <span className="text-white/40 text-sm font-semibold uppercase tracking-widest">Our Services</span>
+              <h2 id="services-heading"
+                className="text-[clamp(2.5rem,5.5vw,4.8rem)] font-black tracking-tight leading-[0.95] mb-8 text-white">
+                Systems Built <br/>
+                <span className="text-gradient">For Growth</span>
+              </h2>
+
+              <p className="text-[clamp(1.1rem,1.5vw,1.25rem)] text-white/50 leading-relaxed mb-12 max-w-md font-medium">
+                We build practical digital systems for businesses that want stronger visibility, better conversion, and measurable growth.
+              </p>
+
+              <m.a href="#contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative inline-flex items-center gap-3 bg-white text-black font-bold pl-8 pr-2 py-2 rounded-full min-h-[60px] cursor-pointer"
+              >
+                <span className="text-[13px] uppercase tracking-widest">Get Started</span>
+                <span className="w-11 h-11 bg-black rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:rotate-45">
+                  <Megaphone size={18} className="text-white" />
+                </span>
+              </m.a>
             </m.div>
+          </div>
 
-            <m.h2 variants={staggerItem} id="services-heading"
-              className="text-[clamp(1.8rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.1] mb-6">
-              What Can RevEnComm Do For You
-            </m.h2>
-
-            <m.p variants={staggerItem} className="text-white/45 leading-relaxed mb-8 text-base">
-              We build practical digital systems for businesses that want stronger visibility, better conversion, and measurable growth.
-            </m.p>
-
-            <m.a variants={staggerItem} href="#contact"
-              whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="inline-flex items-center gap-2.5 bg-[#673DE6] text-white font-semibold
-                         px-5 py-3 rounded-xl text-sm min-h-[48px]
-                         hover:bg-[#5530c4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#673DE6]">
-              <MessageCircle size={15} />
-              Let&apos;s Talk
-            </m.a>
-          </m.div>
-
-          {/* Right — Stacking Cards with 3D Parallax */}
-          <m.div variants={staggerContainer} initial="hidden" whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            className="flex flex-col gap-[70vh] md:gap-[80vh] pb-[30vh] lg:pb-[40vh] relative"
-          >
+          {/* Right — The Stacking Cards Container */}
+          <div className="relative space-y-0">
             {services.map((service, i) => (
-              <ServiceCard 
+              <ServiceCardWrapper 
                 key={service.number} 
                 service={service} 
-                i={i} 
-                progress={scrollYProgress} 
+                index={i} 
                 total={services.length} 
               />
             ))}
-          </m.div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-function ServiceCard({ service, i, progress, total }: { service: any, i: number, progress: MotionValue<number>, total: number }) {
-  const isLast = i === total - 1
-  const targetScale = 1 - ((total - i) * 0.04)
-  const startProgress = i / total
+function ServiceCardWrapper({ service, index, total }: { service: any, index: number, total: number }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  
+  // Track scroll progress for this specific card
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start']
+  })
 
-  const scale = useTransform(progress, [startProgress, 1], [1, targetScale])
+  // Animation values: scale down and fade out as we scroll past
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8 + (index * 0.02)])
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4])
 
   return (
-    <m.div
-      variants={staggerItem}
-      className="sticky w-full rounded-[24px] lg:rounded-[32px] border border-white/[0.08] p-6 lg:p-8 bg-[#0d0d14]
-                 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.6)]"
-      style={{
-        top: `calc(90px + ${i * 75}px)`,
-        zIndex: i + 1,
-        transformOrigin: 'top center',
-        scale: isLast ? 1 : scale
-      }}
-    >
-      <div className="flex items-center gap-4 mb-5 lg:mb-6">
-        <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-[#673DE6]/10 flex items-center justify-center shrink-0 border border-[#673DE6]/20">
-          <service.icon size={20} className="text-[#673DE6]" />
+    <div ref={containerRef} className="h-screen sticky top-0 flex items-center justify-center pointer-events-none">
+      <m.div
+        style={{ 
+          scale: index === total - 1 ? 1 : scale, 
+          opacity: index === total - 1 ? 1 : opacity,
+          top: `calc(10% + ${index * 32}px)`, // Precise stacking offset
+        }}
+        className="w-full pointer-events-auto rounded-[40px] border border-white/10 p-8 lg:p-16 bg-[#11111A]/95 backdrop-blur-3xl
+                   shadow-[0_-30px_60px_-15px_rgba(0,0,0,0.9)] origin-top relative"
+      >
+        <div className="flex flex-col md:flex-row md:items-start gap-10 md:gap-16">
+          <div className="flex-1">
+            <div className="flex items-center gap-6 mb-8">
+              <div className="w-16 h-16 rounded-[24px] bg-[#FF8A00]/10 border border-[#FF8A00]/20 flex items-center justify-center shrink-0">
+                <service.icon size={28} className="text-[#FF8A00]" />
+              </div>
+              <div>
+                <span className="text-[#FF8A00] font-mono text-sm font-bold uppercase tracking-widest block mb-1">Module {service.number}</span>
+                <h3 className="text-white font-black text-3xl lg:text-4xl tracking-tight">
+                  {service.title}
+                </h3>
+              </div>
+            </div>
+
+            <p className="text-white/60 leading-relaxed mb-10 text-lg font-medium max-w-2xl">
+              {service.description}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
+              {service.subServices.map((sub: string) => (
+                <div key={sub} className="flex items-center gap-3 text-sm text-white/80 font-bold group">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FF8A00] group-hover:scale-150 transition-transform" />
+                  {sub}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden lg:flex flex-col gap-3 shrink-0 pt-2">
+            {service.tags.map((tag: string) => (
+              <span key={tag}
+                className="px-4 py-2 rounded-full border border-white/5 bg-white/[0.03]
+                           text-white/30 text-[10px] font-black tracking-widest uppercase">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-        <h3 className="text-white font-extrabold text-xl lg:text-2xl tracking-tight flex items-center gap-3">
-          <span className="text-white/30 font-mono text-sm lg:text-base font-bold">{service.number}.</span>
-          {service.title}
-        </h3>
-      </div>
-
-      <p className="text-white/60 leading-relaxed mb-5 lg:mb-7 text-sm lg:text-base">
-        {service.description}
-      </p>
-
-      <div className="mb-5 lg:mb-7">
-        <h4 className="text-white/30 text-xs font-bold uppercase tracking-widest mb-3 lg:mb-4">What's Included</h4>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
-          {service.subServices.map((sub: string) => (
-            <li key={sub} className="flex items-start gap-2.5 text-xs lg:text-sm text-white/70 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#673DE6] shrink-0 mt-[6px]" aria-hidden="true" />
-              {sub}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="flex flex-wrap gap-2 pt-5 border-t border-white/[0.06]">
-        {service.tags.map((tag: string) => (
-          <span key={tag}
-            className="px-3 py-1 rounded-full border border-[#673DE6]/20 bg-[#673DE6]/5
-                       text-[#a78bf5] text-[11px] lg:text-xs font-semibold tracking-wide">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </m.div>
+      </m.div>
+    </div>
   )
 }

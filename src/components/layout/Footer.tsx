@@ -42,62 +42,68 @@ const socials = [
 ]
 
 const legalLinks = [
-  { label: 'Terms & Conditions', href: '#' },
-  { label: 'Privacy Policy',     href: '#' },
+  { label: 'Terms & Conditions', href: '/terms/conditions' },
+  { label: 'Privacy Policy',     href: '/privacy/policy' },
   { label: 'Contact Us',         href: '/contact' },
 ]
 
 export default function Footer() {
   return (
     <footer
-      className="border-t border-white/10 bg-[#0A0A0F] px-5 md:px-[25px] pt-10 pb-8 font-sans"
+      className="border-t border-white/5 pt-16 pb-12 font-sans relative z-10"
       role="contentinfo"
     >
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] mx-auto px-5 lg:px-10">
         {/* Main row */}
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-16 md:flex-row md:items-start md:justify-between">
 
           {/* Left — Office info */}
-          <div className="flex flex-col gap-3">
-            <p className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase mb-1">
+          <div className="flex flex-col gap-4">
+            <p className="text-[#FF8A00] text-[10px] font-black tracking-[0.3em] uppercase mb-2">
               Bangladesh Office
             </p>
             <a
               href="https://maps.google.com/?q=Square+Road,+GP+Ja,+Mohakhali,+Dhaka"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-2 text-white/50 hover:text-white text-sm transition-colors"
+              className="flex items-start gap-3 text-white/50 hover:text-white text-sm font-medium transition-colors group"
             >
-              <MapPin size={13} className="text-[#673DE6] shrink-0 mt-0.5" />
+              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#FF8A00] group-hover:bg-[#FF8A00] group-hover:text-white transition-all shrink-0">
+                <MapPin size={14} />
+              </div>
               Square Road, GP Ja, Mohakhali, Dhaka
             </a>
             <a
               href="tel:+8801806673304"
-              className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+              className="flex items-center gap-3 text-white/50 hover:text-white text-sm font-medium transition-colors group"
             >
-              <Phone size={13} className="text-[#673DE6] shrink-0" />
+              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#FF8A00] group-hover:bg-[#FF8A00] group-hover:text-white transition-all shrink-0">
+                <Phone size={14} />
+              </div>
               01806673304
             </a>
             <a
               href="mailto:info@revencomm.com"
-              className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+              className="flex items-center gap-3 text-white/50 hover:text-white text-sm font-medium transition-colors group"
             >
-              <Mail size={13} className="text-[#673DE6] shrink-0" />
+              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#FF8A00] group-hover:bg-[#FF8A00] group-hover:text-white transition-all shrink-0">
+                <Mail size={14} />
+              </div>
               info@revencomm.com
             </a>
           </div>
 
           {/* Center — Legal / nav links */}
           <nav aria-label="Footer navigation">
-            <p className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
-              Legal
+            <p className="text-white/40 text-[10px] font-black tracking-[0.3em] uppercase mb-8">
+              Legal Strategy
             </p>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-5">
               {legalLinks.map(({ label, href }) => (
                 <li key={label}>
                   <Link
                     href={href}
-                    className="text-white/50 hover:text-white text-sm transition-colors"
+                    className="text-white/50 hover:text-[#FF8A00] text-sm font-bold transition-colors uppercase tracking-widest text-[11px]"
                   >
                     {label}
                   </Link>
@@ -107,11 +113,11 @@ export default function Footer() {
           </nav>
 
           {/* Right — Socials + copyright */}
-          <div className="flex flex-col gap-4">
-            <p className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">
+          <div className="flex flex-col gap-6">
+            <p className="text-white/40 text-[10px] font-black tracking-[0.3em] uppercase">
               Follow Us
             </p>
-            <div className="flex gap-2.5" role="list" aria-label="Social media links">
+            <div className="flex gap-3" role="list" aria-label="Social media links">
               {socials.map(({ label, Icon, href }) => (
                 <a
                   key={label}
@@ -120,14 +126,14 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 border border-white/10 bg-white/5 flex items-center justify-center
-                             text-white/40 hover:text-white hover:border-[#673DE6]/50 transition-colors duration-200"
+                  className="w-11 h-11 border border-white/5 bg-white/[0.03] flex items-center justify-center
+                             text-white/40 hover:text-white hover:bg-[#FF8A00] hover:border-[#FF8A00] rounded-full transition-all duration-300"
                 >
                   <Icon />
                 </a>
               ))}
             </div>
-            <p className="text-white/25 text-xs mt-auto">
+            <p className="text-white/20 text-[10px] font-bold uppercase tracking-[0.2em] leading-relaxed mt-10">
               © {new Date().getFullYear()} RevEnComm Media & Tech.<br className="hidden md:block" /> All rights reserved.
             </p>
           </div>

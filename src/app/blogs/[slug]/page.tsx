@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer'
 import { getContentBySlug, getContentList, BlogPost } from '@/lib/content'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import ReadingProgress from '@/components/blog/ReadingProgress'
 
 // Enable dynamic params since we haven't set up generateStaticParams yet,
 // but in a fully static export you would want generateStaticParams.
@@ -30,117 +29,132 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const allBlogs = getContentList<BlogPost>('blogs')
   const currentIndex = allBlogs.findIndex(b => b.slug === slug)
-  const prevBlog = allBlogs[currentIndex + 1] ?? null  // older
-  const nextBlog = allBlogs[currentIndex - 1] ?? null  // newer
+  const prevBlog = allBlogs[currentIndex + 1] ?? null
+  const nextBlog = allBlogs[currentIndex - 1] ?? null
 
   return (
     <>
-      <Navbar />
-      <main id="main-content" className="pt-20 md:pt-24 bg-[#0A0A0F] min-h-screen font-sans selection:bg-[#673DE6] selection:text-white">
-        <article>
+      <ReadingProgress />
+
+      <main id="main-content" className="min-h-screen selection:bg-[#FF8A00]/30 selection:text-white pt-32 pb-24">
+        <article className="relative z-10">
+          
           {/* Header Section */}
-          <header className="border-b border-white/10 pt-10 md:pt-24 pb-10 md:pb-16 px-5 md:px-[25px]">
+          <header className="px-5 md:px-10 mb-12 md:mb-20">
             <div className="max-w-[1000px] mx-auto">
               <Link
                 href="/blogs"
-                className="inline-flex items-center gap-2 text-white/50 hover:text-white mb-8 md:mb-16 text-xs font-bold tracking-[0.2em] uppercase transition-colors"
+                className="group inline-flex items-center gap-3 text-white/40 hover:text-[#FF8A00] mb-12 text-[10px] font-black tracking-[0.3em] uppercase transition-all"
               >
-                <ArrowLeft size={16} /> Back to Insights
+                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#FF8A00]/40 group-hover:-translate-x-1 transition-all">
+                  <ArrowLeft size={14} />
+                </div>
+                Intelligence Hub
               </Link>
 
-              <div className="flex flex-wrap items-center gap-3 md:gap-6 text-white/60 text-[10px] md:text-sm font-mono tracking-widest uppercase mb-6 md:mb-8">
-                <span className="text-[#673DE6] font-bold border border-[#673DE6]/30 px-2.5 py-1 bg-[#673DE6]/10">{blog.category}</span>
-                <time dateTime={blog.date}>
-                  {new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              <div className="flex flex-wrap items-center gap-6 text-[#FF8A00] text-[10px] font-black tracking-[0.3em] uppercase mb-8">
+                <span className="bg-[#FF8A00]/10 border border-[#FF8A00]/20 px-3 py-1.5 rounded-lg">{blog.category}</span>
+                <time dateTime={blog.date} className="text-white/40">
+                  {new Date(blog.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </time>
                 <span className="w-1 h-1 bg-white/20 hidden sm:inline-block"></span>
-                <span>{blog.readTime}</span>
+                <span className="text-white/40">{blog.readTime}</span>
               </div>
 
-              <h1 className="text-[clamp(1.75rem,5vw,5rem)] font-extrabold tracking-tight text-white leading-[1.1] uppercase">
+              <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-black tracking-tight text-white leading-[0.95] uppercase mb-12">
                 {blog.title}
               </h1>
+
+              {/* Author/Meta Info */}
+              <div className="flex items-center gap-4 py-8 border-y border-white/5">
+                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-black text-white/40 text-xs">
+                  RC
+                </div>
+                <div>
+                  <p className="text-white font-bold text-sm tracking-tight">RevEnComm Strategy Team</p>
+                  <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest">Growth & Automation Division</p>
+                </div>
+              </div>
             </div>
           </header>
 
           {/* Hero Image */}
-          <div className="w-full max-w-[1400px] mx-auto px-4 md:px-[25px] py-6 md:py-16">
-            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] border border-white/10 bg-[#0e0e14] overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-5 md:px-10 mb-16 md:mb-24">
+            <div className="relative w-full aspect-[21/9] rounded-[40px] border border-white/5 bg-white/[0.02] overflow-hidden group shadow-2xl">
               <Image
                 src={blog.coverImage}
                 alt={blog.title}
                 fill
                 priority
-                className="object-cover opacity-90"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
-              <div className="absolute inset-0 border border-white/5 pointer-events-none mix-blend-overlay"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             </div>
           </div>
 
-          {/* Content Section */}
-          <div className="max-w-[800px] mx-auto px-4 md:px-[25px] pb-12 md:pb-24">
-            <div className="w-full">
-              <MarkdownRenderer content={blog.content} />
-            </div>
+          {/* Content Section with Glassmorphic Plate */}
+          <div className="max-w-[1000px] mx-auto px-5 md:px-10">
+            <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/5 rounded-[48px] p-8 md:p-20 shadow-2xl relative">
+              <div className="max-w-[720px] mx-auto">
+                <div className="prose prose-invert prose-orange max-w-none">
+                  <MarkdownRenderer content={blog.content} />
+                </div>
 
-            {/* Footer / Share */}
-            <div className="mt-10 md:mt-20 pt-8 md:pt-10 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="text-white/50 text-xs font-mono tracking-widest uppercase">
-                End of Article
-              </div>
-              <div className="flex gap-3">
-                <button className="border border-white/10 bg-[#0e0e14] hover:bg-white hover:text-black transition-colors px-4 md:px-6 py-2.5 md:py-3 text-xs font-bold tracking-widest uppercase">
-                  Share
-                </button>
-                <button className="border border-white/10 bg-[#0e0e14] hover:bg-[#673DE6] hover:border-[#673DE6] transition-colors px-4 md:px-6 py-2.5 md:py-3 text-xs font-bold tracking-widest uppercase">
-                  Copy Link
-                </button>
+                {/* Engagement Footer */}
+                <div className="mt-20 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+                  <div className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">
+                    End of Analysis
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest hidden sm:block">Share Strategic Insight:</span>
+                    <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                      <ArrowRight size={18} className="-rotate-45" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Prev / Next Navigation */}
             {(prevBlog || nextBlog) && (
-              <div className="mt-8 md:mt-12 border border-white/10">
-                <div className={`grid gap-px bg-white/10 ${prevBlog && nextBlog ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
-                  {prevBlog && (
-                    <Link
-                      href={`/blogs/${prevBlog.slug}`}
-                      className="group flex flex-col gap-2 md:gap-3 p-5 md:p-8 bg-[#0A0A0F] hover:bg-[#0e0e14] transition-colors"
-                    >
-                      <span className="flex items-center gap-2 text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">
-                        <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform shrink-0" />
-                        Previous Article
-                      </span>
-                      <span className="text-white/80 text-sm font-bold leading-snug group-hover:text-white transition-colors line-clamp-2">
-                        {prevBlog.title}
-                      </span>
-                      <span className="text-[#673DE6] text-[10px] font-bold tracking-widest uppercase">{prevBlog.category}</span>
-                    </Link>
-                  )}
+              <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {prevBlog && (
+                  <Link
+                    href={`/blogs/${prevBlog.slug}`}
+                    className="group relative flex flex-col gap-6 p-8 md:p-12 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-[#FF8A00]/20 transition-all duration-500 overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF8A00]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="flex items-center gap-3 text-[#FF8A00] text-[10px] font-black tracking-[0.3em] uppercase">
+                      <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+                      Older Analysis
+                    </span>
+                    <span className="text-white text-xl md:text-2xl font-black leading-[1.1] tracking-tight group-hover:text-[#FF8A00] transition-colors">
+                      {prevBlog.title}
+                    </span>
+                  </Link>
+                )}
 
-                  {nextBlog && (
-                    <Link
-                      href={`/blogs/${nextBlog.slug}`}
-                      className={`group flex flex-col gap-2 md:gap-3 p-5 md:p-8 bg-[#0A0A0F] hover:bg-[#0e0e14] transition-colors ${prevBlog ? 'sm:text-right border-t sm:border-t-0 sm:border-l border-white/10' : ''}`}
-                    >
-                      <span className={`flex items-center gap-2 text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase ${prevBlog ? 'sm:justify-end' : ''}`}>
-                        Next Article
-                        <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform shrink-0" />
-                      </span>
-                      <span className="text-white/80 text-sm font-bold leading-snug group-hover:text-white transition-colors line-clamp-2">
-                        {nextBlog.title}
-                      </span>
-                      <span className="text-[#673DE6] text-[10px] font-bold tracking-widest uppercase">{nextBlog.category}</span>
-                    </Link>
-                  )}
-                </div>
+                {nextBlog && (
+                  <Link
+                    href={`/blogs/${nextBlog.slug}`}
+                    className="group relative flex flex-col gap-6 p-8 md:p-12 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-[#FF8A00]/20 transition-all duration-500 overflow-hidden text-right items-end"
+                  >
+                    <div className="absolute top-0 left-0 w-32 h-32 bg-[#FF8A00]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="flex items-center gap-3 text-[#FF8A00] text-[10px] font-black tracking-[0.3em] uppercase">
+                      Newer Analysis
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <span className="text-white text-xl md:text-2xl font-black leading-[1.1] tracking-tight group-hover:text-[#FF8A00] transition-colors">
+                      {nextBlog.title}
+                    </span>
+                  </Link>
+                )}
               </div>
             )}
           </div>
           
         </article>
       </main>
-      <Footer />
     </>
   )
 }

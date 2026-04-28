@@ -37,19 +37,28 @@ function BrandList({ reverse = false }: { reverse?: boolean }) {
 
 export default function TrustMarquee() {
   return (
-    <section className="py-12 border-y border-white/[0.06] overflow-hidden" aria-label="Trusted by leading companies">
-      <div className="mb-3">
-        <p className="text-center text-white/25 text-xs tracking-[0.25em] uppercase mb-8">
-          Our Happy Partners
+    <section className="relative py-16 border-y border-white/[0.04] overflow-hidden bg-white/[0.01] backdrop-blur-sm" aria-label="Trusted by leading companies">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="text-center text-[#FF8A00] text-[10px] font-bold tracking-[0.5em] uppercase mb-12 opacity-80">
+          Our Strategic Growth Partners
         </p>
+        
         {/* Row 1 — left to right */}
         <div
-          className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+          className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]"
           aria-hidden="true"
         >
-          <BrandList />
-          {/* Duplicate for seamless loop */}
-          <BrandList />
+          <div className="flex gap-20 animate-marquee shrink-0">
+            {[...brands, ...brands].map((brand, i) => (
+              <span
+                key={`${brand}-${i}`}
+                className="text-white/20 text-lg font-black tracking-tighter uppercase whitespace-nowrap
+                           hover:text-[#FF8A00] transition-colors duration-500 cursor-default"
+              >
+                {brand}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
