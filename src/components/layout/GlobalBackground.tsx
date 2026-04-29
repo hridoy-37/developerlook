@@ -5,8 +5,26 @@ import { m } from 'motion/react'
 export default function GlobalBackground() {
   return (
     <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none select-none bg-[#0A0A0F]">
-      {/* Base Video Layer */}
-      <div className="absolute inset-0 opacity-40">
+      {/* 1. Base Atmospheric Blobs (The "WOW" factor) */}
+      <m.div 
+        animate={{
+          x: [0, 100, 0],
+          y: [0, -50, 0],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#FF8A00]/10 blur-[120px] rounded-full"
+      />
+      <m.div 
+        animate={{
+          x: [0, -80, 0],
+          y: [0, 100, 0],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#FF8A00]/5 blur-[150px] rounded-full"
+      />
+
+      {/* 2. Base Video Layer (Subtle motion) */}
+      <div className="absolute inset-0 opacity-20">
         <video
           autoPlay
           loop
@@ -18,24 +36,24 @@ export default function GlobalBackground() {
         </video>
       </div>
 
-      {/* Atmospheric Overlays */}
-      <div className="absolute inset-0 bg-black/40 z-10" />
+      {/* 3. Overlays for depth */}
+      <div className="absolute inset-0 bg-black/60 z-10" />
       
-      {/* Dynamic Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/10 via-transparent to-purple-500/10 z-20" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(103,61,230,0.1),transparent_70%)] z-20" />
+      {/* 4. Brand Gradients */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#FF8A00]/5 via-transparent to-transparent z-20" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,138,0,0.05),transparent_70%)] z-20" />
 
-      {/* Persistent Grid Pattern */}
+      {/* 5. Persistent Grid Pattern */}
       <div 
-        className="absolute inset-0 opacity-[0.03] z-30"
+        className="absolute inset-0 opacity-[0.02] z-30"
         style={{
           backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
+          backgroundSize: '60px 60px'
         }}
       />
 
-      {/* Subtle Grain Texture */}
-      <div className="absolute inset-0 opacity-[0.02] z-40 pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      {/* 6. Premium Grain Texture (Mix-blend for tactile feel) */}
+      <div className="absolute inset-0 opacity-[0.04] z-40 pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
     </div>
   )
 }

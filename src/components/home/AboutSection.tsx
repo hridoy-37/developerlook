@@ -30,17 +30,17 @@ function StatCard({ value, suffix, label, icon: Icon }: (typeof stats)[0]) {
     <div
       className="bg-glass border border-white/[0.08] rounded-[20px] lg:rounded-[40px]
                  pt-4 pr-4 pl-5 pb-5 lg:pt-6 lg:pr-6 lg:pb-8 2xl:pt-8 2xl:pr-8 2xl:pl-10 2xl:pb-10
-                 flex flex-col gap-3 hover:border-[#673DE6]/30 transition-colors duration-300"
+                 flex flex-col gap-3 hover:border-[#FF8A00]/30 transition-colors duration-300"
     >
       <div className="self-end">
-        <div className="w-10 h-10 rounded-xl bg-[#673DE6]/10 border border-[#673DE6]/20 flex items-center justify-center">
-          <Icon size={18} className="text-[#673DE6]" />
+        <div className="w-10 h-10 rounded-xl bg-[#FF8A00]/10 border border-[#FF8A00]/20 flex items-center justify-center">
+          <Icon size={18} className="text-[#FF8A00]" />
         </div>
       </div>
       <div>
         <div className="text-[clamp(1.8rem,3.5vw,3rem)] font-extrabold text-white tabular-nums leading-[1] mb-1">
           <span ref={ref}>0</span>
-          <span className="text-[#673DE6]">{suffix}</span>
+          <span className="text-[#FF8A00]">{suffix}</span>
         </div>
         <p className="text-white/60 text-sm mt-3 font-semibold leading-tight">{label}</p>
       </div>
